@@ -32,7 +32,8 @@ No Windows, na primeira vez, o Firewall pergunta se o Node pode acessar a rede: 
 ### Atalho para abrir tudo de uma vez
 
 - **Windows:** dê dois cliques em `iniciar.bat`. Ele sobe o servidor e abre o Chrome em tela cheia (modo quiosque) já liberando o som.
-- **Linux/macOS:** `./iniciar.sh`.
+- **Mac:** dê dois cliques em `Iniciar Hulioque.command`. Ele abre o Terminal, instala o que falta na primeira vez, liga o servidor e abre a TV no Chrome. Para desligar, feche a janela do Terminal. Na primeira vez, se o Mac disser que não pode verificar o desenvolvedor, abra Ajustes do Sistema › Privacidade e Segurança e clique em **Abrir Mesmo Assim**.
+- **Linux:** `./iniciar.sh`.
 
 Para sair do modo quiosque: `Alt+F4` (Windows) ou `Cmd+Q` (macOS).
 
