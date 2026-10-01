@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Caraoquê de casa · TV</title>
+  <title>Hulioquê · TV</title>
   <link rel="stylesheet" href="/tv.css">
 </head>
 <body>
   <div id="player-wrap"><div id="player"></div></div>
 
   <section id="screen-idle" class="screen">
-    <h1 class="logo">🎤 Caraoquê de casa</h1>
+    <div class="brand brand-top" data-brand></div>
+    <h1 class="logo">🎤 Hulioquê</h1>
     <div class="join">
       <img class="qr" src="/api/qr.svg" alt="QR code para entrar">
       <div>
@@ -23,6 +24,7 @@
   </section>
 
   <section id="screen-intro" class="screen">
+    <div class="brand brand-top" data-brand></div>
     <p class="intro-label">Próximo a cantar</p>
     <p id="intro-singer" class="intro-singer"></p>
     <p id="intro-title" class="intro-title"></p>
@@ -34,19 +36,32 @@
   </section>
 
   <div id="hud">
-    <div id="hud-singer" class="badge"></div>
-    <div id="hud-next"></div>
+    <div class="hud-left">
+      <div class="brand brand-hud" data-brand></div>
+      <div id="hud-singer" class="badge"></div>
+    </div>
+    <div class="hud-right">
+      <div id="hud-next"></div>
+      <div class="hud-qr">
+        <img class="qr" src="/api/qr.svg" alt="">
+        <span>Escaneie e<br>escolha a sua</span>
+      </div>
+    </div>
   </div>
   <div id="paused" class="badge">⏸ Pausado</div>
   <div id="toast"></div>
 
   <div id="start" class="screen">
-    <h1 class="logo">🎤 Caraoquê de casa</h1>
+    <div class="brand brand-top" data-brand></div>
+    <h1 class="logo">🎤 Hulioquê</h1>
     <p class="start-hint">Clique ou aperte qualquer tecla para começar</p>
     <p class="muted">Atalhos: Espaço pausa · → pula · F tela cheia</p>
   </div>
 
+  <footer class="credit">Produto by Life is a Huli</footer>
+
   <script src="/socket.io/socket.io.js"></script>
+  <script src="/marca.js"></script>
   <script src="/tv.js"></script>
   <script src="https://www.youtube.com/iframe_api"></script>
 </body>

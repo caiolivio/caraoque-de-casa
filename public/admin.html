@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d0716">
+  <title>Hulioquê · Administração</title>
+  <link rel="stylesheet" href="/celular.css">
+  <link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+  <div class="admin">
+    <header class="admin-head">
+      <div class="brand brand-admin" data-brand></div>
+      <h1>🎤 Hulioquê · Administração</h1>
+      <a href="/" class="back">← Voltar para o app</a>
+    </header>
+
+    <form id="pin-form" class="card pin" hidden>
+      <p>Digite o PIN do anfitrião.</p>
+      <p class="muted small">Ele aparece no terminal do PC e nesta mesma página quando aberta no próprio PC.</p>
+      <input id="pin-input" inputmode="numeric" maxlength="12" placeholder="PIN" autocomplete="off">
+      <button class="primary" type="submit">Entrar</button>
+    </form>
+
+    <div id="panel" hidden>
+      <section id="access" class="card" hidden>
+        <h2>Acesso</h2>
+        <div class="access-grid">
+          <div><span class="muted">PIN do anfitrião</span><strong id="pin-value" class="pin-value"></strong></div>
+          <div><span class="muted">TV (neste PC)</span><strong id="tv-url"></strong></div>
+          <div><span class="muted">Celulares (mesmo Wi-Fi)</span><strong id="join-url"></strong></div>
+        </div>
+        <p class="muted small">No celular, use o PIN na aba <strong>Anfitrião</strong> para pausar, pular e reordenar a fila. Para trocar o PIN de forma fixa, coloque <code>HOST_PIN=1234</code> no arquivo <code>.env</code>.</p>
+      </section>
+
+      <section class="card">
+        <h2>Listas de músicas</h2>
+        <p class="muted small">Aparecem como botões na tela de escolher música do celular. Adicione músicas buscando pelo nome ou colando o link do YouTube (vale para vídeos "Não listados").</p>
+        <form id="new-list" class="row">
+          <input id="new-list-name" maxlength="40" placeholder="Nome da nova lista (ex.: Anos 80)">
+          <button class="primary" type="submit">Criar lista</button>
+        </form>
+        <div id="lists"></div>
+      </section>
+
+      <section class="card">
+        <h2>Aparência</h2>
+        <div class="media-grid">
+          <div class="media" data-kind="fundo">
+            <h3>Foto de fundo</h3>
+            <p class="muted small">Ideal: <strong>1920 × 1080 px</strong> (16:9), JPG, até 2 MB. Deixe o assunto principal no centro: no celular a foto é cortada nas laterais.</p>
+            <div class="preview preview-bg"></div>
+            <div class="row">
+              <label class="button primary">Enviar foto<input type="file" accept="image/jpeg,image/png,image/webp" hidden></label>
+              <button type="button" class="remove">Remover</button>
+            </div>
+          </div>
+          <div class="media" data-kind="logo">
+            <h3>Logo Life is a Huli</h3>
+            <p class="muted small">Ideal: <strong>PNG com fundo transparente</strong>, cerca de 1000 × 400 px, em versão clara (branca) para aparecer sobre fundos escuros.</p>
+            <div class="preview preview-logo"></div>
+            <div class="row">
+              <label class="button primary">Enviar logo<input type="file" accept="image/png,image/webp,image/jpeg" hidden></label>
+              <button type="button" class="remove">Remover</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <p class="credit admin-credit">Produto by Life is a Huli</p>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/marca.js"></script>
+  <script src="/admin.js"></script>
+</body>
+</html>

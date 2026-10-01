@@ -18,6 +18,7 @@ body {
   margin: 0;
   min-height: 100vh;
   background: var(--bg);
+  background-attachment: fixed;
   color: var(--fg);
   font-size: 16px;
 }
@@ -168,3 +169,51 @@ main { flex: 1; padding: 16px 16px 96px; }
   transition: transform .25s ease, opacity .25s ease;
 }
 .toast.show { transform: translateY(0); opacity: 1; }
+
+/* Foto de fundo enviada na administração (bem escurecida para não atrapalhar a leitura) */
+.has-bg body {
+  background:
+    linear-gradient(rgba(13, 7, 22, .78), rgba(13, 7, 22, .92)),
+    var(--bg-image) center / cover no-repeat fixed,
+    var(--bg);
+}
+.has-bg #join { min-height: 100vh; }
+
+/* Marca Life is a Huli */
+.brand { display: flex; justify-content: center; }
+.brand-join { height: 64px; margin-bottom: 8px; }
+.brand-logo { height: 100%; width: auto; max-width: 70vw; object-fit: contain; }
+.brand-text { font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: 15px; color: var(--fg); align-self: center; }
+
+.credit { text-align: center; font-size: 11px; color: var(--muted); padding: 0 16px 84px; opacity: .8; }
+.join-credit { padding: 32px 0 0; }
+main { padding-bottom: 16px; }
+.small { font-size: 13px; }
+
+/* Listas */
+.chips { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 6px; scrollbar-width: none; }
+.chips::-webkit-scrollbar { display: none; }
+.chips button {
+  flex: none;
+  border-radius: 99px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--card);
+  border: 1px solid #3a2a57;
+  white-space: nowrap;
+}
+.chips button.active { background: linear-gradient(135deg, var(--accent), var(--accent2)); border-color: transparent; }
+.results-title { margin: 14px 2px 0; font-weight: 800; font-size: 18px; }
+
+.admin-link {
+  display: block;
+  margin: 18px 0 4px;
+  padding: 14px;
+  text-align: center;
+  border-radius: 12px;
+  background: var(--card2);
+  color: var(--fg);
+  font-weight: 700;
+  text-decoration: none;
+}

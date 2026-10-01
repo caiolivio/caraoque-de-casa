@@ -13,11 +13,7 @@
   let introEndsAt = 0;
   let stallTimer = null;
 
-  fetch('/api/info')
-    .then((r) => r.json())
-    .then(({ joinUrl }) => {
-      document.querySelectorAll('[data-join-url]').forEach((el) => (el.textContent = joinUrl));
-    });
+  socket.on('branding', (info) => window.applyBranding(info));
 
   // ---- Início (o navegador só libera som depois de uma interação) ----
   function start() {

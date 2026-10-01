@@ -43,6 +43,43 @@ html, body {
     radial-gradient(circle at 80% 80%, rgba(255, 79, 163, .3), transparent 50%),
     var(--bg);
 }
+/* Com foto de fundo enviada na administração: escurece um pouco para o texto aparecer. */
+.has-bg .screen {
+  background:
+    linear-gradient(rgba(8, 4, 14, .55), rgba(8, 4, 14, .7)),
+    var(--bg-image) center / cover no-repeat,
+    var(--bg);
+}
+.screen > :not(.logo) { text-shadow: 0 .3vh 1.5vh rgba(0, 0, 0, .5); }
+
+/* Marca Life is a Huli */
+.brand-text {
+  font-weight: 800;
+  letter-spacing: .04em;
+  font-size: 3.2vh;
+  text-transform: uppercase;
+}
+.brand-logo { display: block; height: 100%; width: auto; max-width: 30vw; object-fit: contain; }
+.brand-top { position: absolute; top: 4vh; left: 4vw; height: 12vh; display: flex; align-items: center; }
+.brand-hud {
+  height: 6vh;
+  display: flex;
+  align-items: center;
+  opacity: .9;
+  filter: drop-shadow(0 .3vh 1vh rgba(0, 0, 0, .7));
+}
+.brand-hud .brand-text { font-size: 2.4vh; }
+
+.credit {
+  position: fixed;
+  bottom: 1.2vh;
+  right: 1.5vw;
+  z-index: 20;
+  font-size: 1.6vh;
+  color: rgba(255, 255, 255, .6);
+  text-shadow: 0 .2vh .6vh rgba(0, 0, 0, .8);
+  pointer-events: none;
+}
 
 .logo {
   margin: 0;
@@ -119,6 +156,22 @@ html, body {
   align-items: flex-start;
   pointer-events: none;
 }
+.hud-left, .hud-right { display: flex; flex-direction: column; gap: 1.2vh; }
+.hud-left { align-items: flex-start; }
+.hud-right { align-items: flex-end; }
+.hud-qr {
+  display: flex;
+  align-items: center;
+  gap: 1vh;
+  background: rgba(13, 7, 22, .7);
+  border-radius: 1.5vh;
+  padding: 1vh;
+  font-size: 1.8vh;
+  line-height: 1.25;
+  color: #eee;
+  backdrop-filter: blur(6px);
+}
+.hud-qr .qr { width: 13vh; height: 13vh; padding: .6vh; border-radius: 1vh; }
 #hud-next {
   max-width: 32vw;
   background: rgba(13, 7, 22, .7);

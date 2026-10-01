@@ -4,6 +4,6 @@ if not exist node_modules (
   echo Instalando dependencias...
   call npm install || pause
 )
-start "Caraoque de casa" cmd /k npm start
+start "Hulioque" cmd /k npm start
 timeout /t 3 /nobreak >nul
 start chrome --kiosk --autoplay-policy=no-user-gesture-required "http://localhost:3000/tv?autostart"

@@ -26,6 +26,8 @@
   let isHost = false;
   let state = null;
   let lastResults = [];
+  let playlists = [];
+  let activeList = null; // id da lista aberta; null = resultados da busca
   let lastTurnAlert = null;
 
   // crypto.randomUUID só existe em https; pelo IP da rede local a página é http.
@@ -110,6 +112,9 @@
     const q = $('search-input').value.trim();
     if (!q) return;
     $('search-input').blur();
+    activeList = null;
+    renderLists();
+    $('results-title').hidden = true;
     $('search-status').textContent = 'Buscando…';
     $('results').replaceChildren();
     try {
@@ -124,6 +129,41 @@
       $('search-status').textContent = err.message || 'A busca falhou.';
     }
   });
+
+  // ---- Listas (ex.: Life is a Huli) ----
+  function renderLists() {
+    $('lists').replaceChildren(
+      ...playlists.map((p) =>
+        h('button', {
+          type: 'button',
+          class: p.id === activeList ? 'active' : '',
+          onclick: () => openList(p.id === activeList ? null : p.id),
+        }, `⭐ ${p.name}`),
+      ),
+    );
+  }
+
+  function openList(id) {
+    activeList = id;
+    renderLists();
+    const p = playlists.find((x) => x.id === id);
+    if (!p) {
+      activeList = null;
+      lastResults = [];
+      $('results-title').hidden = true;
+      $('search-status').textContent = '';
+      renderLists();
+      renderResults();
+      return;
+    }
+    $('results-title').hidden = false;
+    $('results-title').textContent = `⭐ ${p.name}`;
+    lastResults = p.items;
+    $('search-status').textContent = p.items.length
+      ? `${plural(p.items.length, 'música', 'músicas')}`
+      : 'Esta lista ainda está vazia. O anfitrião adiciona músicas em Anfitrião › Gerenciar listas.';
+    renderResults();
+  }
 
   function inQueue(videoId) {
     if (!state) return false;
@@ -312,6 +352,17 @@
     state = s;
     render();
   });
+
+  let listsShown = false;
+  socket.on('playlists', (lists) => {
+    playlists = lists;
+    // Na primeira vez, já abre a primeira lista (Life is a Huli) se ela tiver músicas.
+    if (!listsShown && !lastResults.length && lists[0]?.items.length) activeList = lists[0].id;
+    listsShown = true;
+    if (activeList) openList(activeList);
+    else renderLists();
+  });
+  socket.on('branding', (info) => window.applyBranding(info));
 
   socket.on('toast', ({ message, singerId }) => {
     if (!singerId || singerId === me?.id) toast(message);

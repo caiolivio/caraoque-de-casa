@@ -1,4 +1,6 @@
-# 🎤 Caraoquê de casa
+# 🎤 Hulioquê
+
+*Produto by Life is a Huli.*
 
 Karaokê caseiro: o PC ligado na TV toca vídeos do YouTube e a galera monta a fila pelo celular, lendo um QR code na tela. A TV mostra quem vai cantar, com contagem regressiva para dar tempo de pegar o microfone.
 
@@ -41,7 +43,9 @@ Para sair do modo quiosque: `Alt+F4` (Windows) ou `Cmd+Q` (macOS).
 - **Fila:** mostra o que está tocando, a ordem e quantas músicas faltam para a sua. Você pode tirar as suas músicas da fila.
 - Quando chegar sua vez, o celular vibra e mostra "É a sua vez!".
 
-**Anfitrião** (aba Anfitrião, com o PIN do terminal)
+**Durante a música**, a TV mostra no canto quem está cantando, as próximas da fila e um QR code pequeno para a galera continuar escolhendo.
+
+**Anfitrião** (aba Anfitrião no celular, com o PIN)
 - Pausar, continuar, pular, recomeçar a música e ajustar o volume.
 - Na aba Fila: subir, descer, mandar para o topo e remover qualquer música.
 
@@ -49,6 +53,20 @@ Para sair do modo quiosque: `Alt+F4` (Windows) ou `Cmd+Q` (macOS).
 - `Espaço` pausa ou continua · `→` pula · `F` tela cheia
 
 Vídeos que o dono bloqueou para tocar fora do YouTube são pulados sozinhos, e quem escolheu recebe um aviso.
+
+## Administração: PIN, listas e aparência
+
+No PC da TV, abra **http://localhost:3000/admin**. Ali aparecem o PIN do anfitrião e os endereços. Do celular, a mesma página abre pela aba Anfitrião › "Gerenciar listas, foto de fundo e logo" (pede o PIN).
+
+- **Listas de músicas:** a lista "Life is a Huli" já vem criada. Crie outras (Anos 80, Sertanejo…), adicione músicas buscando ou colando o link do YouTube, reordene e exclua. As listas aparecem como botões na tela de busca do celular, e a primeira abre sozinha.
+- **Foto de fundo:** ideal 1920 × 1080 px (16:9), JPG, até 2 MB. O assunto principal deve ficar no centro, porque no celular a foto é cortada nas laterais. A foto aparece escurecida para o texto continuar legível.
+- **Logo:** PNG com fundo transparente, cerca de 1000 × 400 px, em versão clara.
+
+Tudo fica salvo na pasta `data/` do projeto (não vai para o GitHub). Para levar para outro PC, copie essa pasta.
+
+## Músicas próprias
+
+Suba a música no YouTube como vídeo com a letra na tela e deixe a visibilidade como **Não listado**: só quem tem o link acha, mas ela toca normalmente aqui. Confira em "Mais opções" que **Permitir incorporação** está marcado. Depois cole o link na lista "Life is a Huli" pela administração.
 
 ## Configuração (opcional)
 
