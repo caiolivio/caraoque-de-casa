@@ -1,0 +1,20 @@
+{
+  "name": "caraoque-de-casa",
+  "version": "0.1.0",
+  "description": "Karaokê caseiro: a TV toca vídeos do YouTube e a galera monta a fila pelo celular.",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20.12"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "qrcode": "^1.5.4",
+    "socket.io": "^4.8.1"
+  }
+}

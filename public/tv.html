@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Caraoquê de casa · TV</title>
+  <link rel="stylesheet" href="/tv.css">
+</head>
+<body>
+  <div id="player-wrap"><div id="player"></div></div>
+
+  <section id="screen-idle" class="screen">
+    <h1 class="logo">🎤 Caraoquê de casa</h1>
+    <div class="join">
+      <img class="qr" src="/api/qr.svg" alt="QR code para entrar">
+      <div>
+        <p class="join-title">Escaneie para cantar</p>
+        <p class="join-steps">Conecte no Wi-Fi de casa, aponte a câmera e escolha sua música.</p>
+        <p class="join-url" data-join-url></p>
+      </div>
+    </div>
+    <p id="idle-status" class="muted"></p>
+  </section>
+
+  <section id="screen-intro" class="screen">
+    <p class="intro-label">Próximo a cantar</p>
+    <p id="intro-singer" class="intro-singer"></p>
+    <p id="intro-title" class="intro-title"></p>
+    <p id="intro-count" class="intro-count"></p>
+    <div class="intro-footer">
+      <img class="qr qr-small" src="/api/qr.svg" alt="">
+      <span>Pegue o microfone! Mais gente quer cantar? Escaneie o QR code.</span>
+    </div>
+  </section>
+
+  <div id="hud">
+    <div id="hud-singer" class="badge"></div>
+    <div id="hud-next"></div>
+  </div>
+  <div id="paused" class="badge">⏸ Pausado</div>
+  <div id="toast"></div>
+
+  <div id="start" class="screen">
+    <h1 class="logo">🎤 Caraoquê de casa</h1>
+    <p class="start-hint">Clique ou aperte qualquer tecla para começar</p>
+    <p class="muted">Atalhos: Espaço pausa · → pula · F tela cheia</p>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/tv.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+</body>
+</html>
