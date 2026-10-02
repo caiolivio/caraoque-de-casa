@@ -8,7 +8,7 @@ Karaokê caseiro em Node.js, da marca Life is a Huli (rodapé "Produto by Life i
 - `server/karaoke.js`: classe `Karaoke`, fonte da verdade da fila. Fases: `idle` → `intro` (contagem de 10 s) → `playing` ⇄ `paused`. Emite `change`; o servidor transmite `state` (snapshot completo) para todos a cada mudança. Só avança a fila quando há pelo menos uma TV pronta (`tv:ready`).
 - `server/youtube.js`: busca. Com `YOUTUBE_API_KEY` usa a Data API v3; sem chave, lê `ytInitialData` da página de resultados. Links colados viram um resultado via oEmbed.
 - `server/playlists.js`: listas do anfitrião (padrão: "Life is a Huli"), salvas em `data/listas.json`. Mudanças vão para todos via evento `playlists`.
-- `server/media.js`: foto de fundo e logo enviados pela administração, em `data/midia/`, servidos em `/media/fundo` e `/media/logo`. Formato reconhecido pelos bytes (JPG, PNG, WebP; nunca SVG). Mudanças emitem `branding`.
+- `server/media.js`: foto de fundo, logo e vídeo de fundo (só TV) enviados pela administração, em `data/midia/`, servidos em `/media/fundo`, `/media/logo` e `/media/video`. Formato reconhecido pelos bytes (JPG, PNG, WebP, MP4, WebM; nunca SVG). Mudanças emitem `branding`.
 - Administração: rotas REST em `/api/admin/*` (sem PIN em localhost; senão cabeçalho `x-host-pin`). Página `public/admin.html/js/css`.
 - `server/store.js`: persiste fila/histórico/volume em `data/estado.json` (ignorado no git). Sem banco nativo de propósito, para `npm install` funcionar em qualquer Windows sem compilador.
 - `public/`: sem build, JavaScript puro.

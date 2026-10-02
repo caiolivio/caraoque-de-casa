@@ -105,6 +105,12 @@
     $('paused').hidden = phase !== 'paused';
     $('player-wrap').classList.toggle('visible', phase === 'playing' || phase === 'paused');
 
+    // Vídeo de fundo: só nas telas de espera; pausa durante a música para não pesar no PC.
+    const singing = phase === 'playing' || phase === 'paused';
+    $('bg-video').hidden = singing;
+    const bg = $('bg-video').querySelector('video');
+    if (bg) singing ? bg.pause() : bg.play().catch(() => {});
+
     if (phase === 'idle') {
       $('idle-status').textContent = !started
         ? ''

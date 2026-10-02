@@ -59,3 +59,10 @@ test('reconhece imagens pelo conteúdo', () => {
   assert.equal(detectImageType(Buffer.from('RIFF0000WEBPVP8 ')), 'image/webp');
   assert.equal(detectImageType(Buffer.from('<svg onload=alert(1)>')), null);
 });
+
+test('reconhece vídeos pelo conteúdo', async () => {
+  const { detectVideoType } = await import('../server/media.js');
+  assert.equal(detectVideoType(Buffer.from('000000206674797069736f6d00000200', 'hex')), 'video/mp4');
+  assert.equal(detectVideoType(Buffer.from('1a45dfa3a3428680428101425ff7', 'hex')), 'video/webm');
+  assert.equal(detectVideoType(Buffer.from('<html>nada aqui</html>')), null);
+});

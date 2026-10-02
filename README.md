@@ -61,6 +61,7 @@ No PC da TV, abra **http://localhost:3000/admin**. Ali aparecem o PIN do anfitri
 
 - **Listas de músicas:** a lista "Life is a Huli" já vem criada. Crie outras (Anos 80, Sertanejo…), adicione músicas buscando ou colando o link do YouTube, reordene e exclua. As listas aparecem como botões na tela de busca do celular, e a primeira abre sozinha.
 - **Foto de fundo:** ideal 1920 × 1080 px (16:9), JPG, até 2 MB. O assunto principal deve ficar no centro, porque no celular a foto é cortada nas laterais. A foto aparece escurecida para o texto continuar legível.
+- **Vídeo de fundo da TV:** MP4, 1920 × 1080 px, de 10 a 30 segundos, que fique bom repetindo em loop (até 100 MB, ideal abaixo de 30 MB). Toca sem som nas telas de espera da TV, no lugar da foto, e pausa durante a música. Nos celulares continua a foto.
 - **Logo:** PNG com fundo transparente, cerca de 1000 × 400 px, em versão clara.
 
 Tudo fica salvo na pasta `data/` do projeto (não vai para o GitHub). Para levar para outro PC, copie essa pasta.

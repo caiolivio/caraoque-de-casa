@@ -42,6 +42,8 @@ code { background: var(--card2); padding: 1px 6px; border-radius: 6px; font-size
   padding: 12px;
 }
 .preview-logo { background: repeating-conic-gradient(#33383a 0 25%, #3c4345 0 50%) 0 0 / 20px 20px; }
+.preview-video { padding: 0; overflow: hidden; }
+.preview-video video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .preview-logo img { max-width: 90%; max-height: 90%; object-fit: contain; }
 label.button {
   display: inline-block;

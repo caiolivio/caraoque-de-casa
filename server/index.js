@@ -10,7 +10,7 @@ import { searchVideos, SearchError } from './youtube.js';
 import { createStore } from './store.js';
 import { getLanIp } from './network.js';
 import { Playlists } from './playlists.js';
-import { createMedia, MAX_IMAGE_BYTES, MEDIA_KINDS } from './media.js';
+import { createMedia, MAX_VIDEO_BYTES, MEDIA_KINDS } from './media.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 if (existsSync(join(root, '.env'))) process.loadEnvFile(join(root, '.env'));
@@ -102,7 +102,7 @@ admin.post(
 
 admin.put(
   '/media/:kind',
-  express.raw({ type: () => true, limit: MAX_IMAGE_BYTES }),
+  express.raw({ type: () => true, limit: MAX_VIDEO_BYTES }),
   (req, res) => {
     if (!MEDIA_KINDS.includes(req.params.kind)) return res.status(404).json({ error: 'Tipo inválido.' });
     try {
@@ -123,7 +123,7 @@ admin.delete('/media/:kind', (req, res) => {
 
 app.use('/api/admin', admin);
 app.use((err, _req, res, _next) => {
-  if (err.type === 'entity.too.large') return res.status(413).json({ error: 'Imagem grande demais (máximo 15 MB).' });
+  if (err.type === 'entity.too.large') return res.status(413).json({ error: 'Arquivo grande demais (máximo 100 MB para vídeo, 15 MB para imagem).' });
   console.error(err);
   res.status(500).json({ error: 'Algo deu errado.' });
 });

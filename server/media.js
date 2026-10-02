@@ -1,9 +1,18 @@
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-// Imagens enviadas pelo anfitrião: foto de fundo e logo.
-export const MEDIA_KINDS = ['fundo', 'logo'];
+// Arquivos enviados pelo anfitrião: foto de fundo, logo e vídeo de fundo da TV.
+export const MEDIA_KINDS = ['fundo', 'logo', 'video'];
 export const MAX_IMAGE_BYTES = 15 * 1024 * 1024;
+export const MAX_VIDEO_BYTES = 100 * 1024 * 1024;
+
+// Vídeo: MP4/MOV (caixa "ftyp") ou WebM (cabeçalho EBML).
+export function detectVideoType(buf) {
+  if (buf.length < 12) return null;
+  if (buf.toString('ascii', 4, 8) === 'ftyp') return 'video/mp4';
+  if (buf[0] === 0x1a && buf[1] === 0x45 && buf[2] === 0xdf && buf[3] === 0xa3) return 'video/webm';
+  return null;
+}
 
 // Reconhece o formato pelos primeiros bytes (não confia no que o navegador diz).
 export function detectImageType(buf) {
@@ -40,8 +49,16 @@ export function createMedia(dir) {
       return existsSync(file) ? { file, type: meta[kind].type } : null;
     },
     save(kind, buf) {
-      const type = detectImageType(buf);
-      if (!type) throw new Error('Envie uma imagem JPG, PNG ou WebP.');
+      let type;
+      if (kind === 'video') {
+        type = detectVideoType(buf);
+        if (!type) throw new Error('Envie um vídeo MP4 ou WebM.');
+        if (buf.length > MAX_VIDEO_BYTES) throw new Error('Vídeo grande demais (máximo 100 MB).');
+      } else {
+        type = detectImageType(buf);
+        if (!type) throw new Error('Envie uma imagem JPG, PNG ou WebP.');
+        if (buf.length > MAX_IMAGE_BYTES) throw new Error('Imagem grande demais (máximo 15 MB).');
+      }
       mkdirSync(dir, { recursive: true });
       writeFileSync(join(dir, kind), buf);
       meta[kind] = { type, version: Date.now() };

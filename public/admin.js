@@ -218,6 +218,18 @@
     bg.textContent = fundo ? '' : 'Sem foto (usando o degradê padrão)';
     const lg = document.querySelector('.preview-logo');
     lg.replaceChildren(logo ? h('img', { src: logo, alt: 'Logo' }) : 'Sem logo (mostrando o nome “Life is a Huli”)');
+    const { video } = info?.media ?? {};
+    const pv = document.querySelector('.preview-video');
+    if (video) {
+      if (pv.querySelector('video')?.getAttribute('src') !== video) {
+        const v = h('video', { src: video, muted: '', loop: '', autoplay: '', playsinline: '' });
+        v.muted = true;
+        pv.replaceChildren(v);
+      }
+    } else {
+      pv.replaceChildren('Sem vídeo (usando a foto ou o degradê)');
+    }
+    document.querySelector('[data-kind="video"] .remove').disabled = !video;
     document.querySelector('[data-kind="fundo"] .remove').disabled = !fundo;
     document.querySelector('[data-kind="logo"] .remove').disabled = !logo;
   }
@@ -228,10 +240,12 @@
       const file = e.target.files[0];
       e.target.value = '';
       if (!file) return;
-      if (file.size > 15 * 1024 * 1024) throw new Error('Imagem grande demais (máximo 15 MB).');
+      const limit = kind === 'video' ? 100 : 15;
+      if (file.size > limit * 1024 * 1024) throw new Error(`Arquivo grande demais (máximo ${limit} MB).`);
       toast('Enviando…');
       await api('PUT', `/api/admin/media/${kind}`, file, file.type);
-      toast(kind === 'fundo' ? 'Foto de fundo atualizada. A TV já mudou.' : 'Logo atualizado. A TV já mudou.');
+      const done = { fundo: 'Foto de fundo atualizada.', logo: 'Logo atualizado.', video: 'Vídeo de fundo atualizado.' };
+      toast(`${done[kind]} A TV já mudou.`);
     }));
     box.querySelector('.remove').addEventListener('click', run(async () => {
       if (confirm('Remover esta imagem?')) await api('DELETE', `/api/admin/media/${kind}`);
