@@ -1,7 +1,7 @@
 {
   "name": "caraoque-de-casa",
   "version": "0.1.0",
-  "description": "Hulioquê, by Life is a Huli. Karaokê caseiro: a TV toca vídeos do YouTube e a galera monta a fila pelo celular.",
+  "description": "Huliokê, by Life is a Huli. Karaokê caseiro: a TV toca vídeos do YouTube e a galera monta a fila pelo celular.",
   "type": "module",
   "private": true,
   "engines": {

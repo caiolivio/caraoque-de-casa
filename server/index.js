@@ -230,7 +230,7 @@ setInterval(() => {
 
 server.listen(PORT, () => {
   console.log('');
-  console.log('  🎤  Hulioquê está no ar!  · Life is a Huli');
+  console.log('  🎤  Huliokê está no ar!  · Life is a Huli');
   console.log('');
   console.log(`  TV (abra neste PC):       http://localhost:${PORT}/tv`);
   console.log(`  Celulares (mesmo Wi-Fi):  ${joinUrl}`);

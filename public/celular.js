@@ -4,7 +4,7 @@
   const $ = (id) => document.getElementById(id);
 
   const EMOJIS = ['🎤', '🎸', '🦄', '🐱', '🐶', '🦊', '🐼', '🐸', '🌟', '🔥', '🍕', '👑', '💃', '🕺', '🤘', '😎'];
-  const COLORS = ['#ff4fa3', '#7c5cff', '#22d3ee', '#facc15', '#4ade80', '#fb923c', '#f87171', '#a78bfa'];
+  const COLORS = ['#43bec6', '#a8d2de', '#5fd3dc', '#f2c14e', '#9bd770', '#f78c6b', '#7fd1b9', '#ffffff'];
 
   const storage = {
     get(key) {

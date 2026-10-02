@@ -1,4 +1,4 @@
-# Hulioquê (Life is a Huli)
+# Huliokê (Life is a Huli)
 
 Karaokê caseiro em Node.js, da marca Life is a Huli (rodapé "Produto by Life is a Huli" em todas as telas). O PC ligado na TV roda o servidor; celulares na mesma rede montam a fila. Interface e mensagens em português do Brasil.
 

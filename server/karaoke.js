@@ -22,7 +22,7 @@ export function sanitizeSinger(singer) {
     id,
     name,
     emoji: cleanText(singer?.emoji, 8) || '🎤',
-    color: COLOR.test(singer?.color ?? '') ? singer.color : '#ff4fa3',
+    color: COLOR.test(singer?.color ?? '') ? singer.color : '#43bec6',
   };
 }
 

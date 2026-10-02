@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { Karaoke, KaraokeError } from '../server/karaoke.js';
 
-const singer = (name) => ({ id: name.toLowerCase(), name, emoji: '🎤', color: '#ff4fa3' });
+const singer = (name) => ({ id: name.toLowerCase(), name, emoji: '🎤', color: '#43bec6' });
 const video = (n) => ({ videoId: `video${String(n).padStart(6, '0')}`, title: `Música ${n}` });
 
 // Relógio e timers falsos para controlar a contagem regressiva.
@@ -91,7 +91,7 @@ test('limpa texto e monta a miniatura no servidor', () => {
   const { k } = setup();
   const { item } = k.add({ id: 'a', name: '  Ana   Paula ', color: 'red' }, { ...video(1), thumb: 'javascript:x' });
   assert.equal(item.singer.name, 'Ana Paula');
-  assert.equal(item.singer.color, '#ff4fa3');
+  assert.equal(item.singer.color, '#43bec6');
   assert.match(item.thumb, /^https:\/\/i\.ytimg\.com\//);
 });
 

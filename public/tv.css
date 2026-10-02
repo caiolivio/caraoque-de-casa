@@ -1,9 +1,11 @@
 :root {
-  --bg: #0d0716;
-  --fg: #fff;
-  --muted: #b9a9d6;
-  --accent: #ff4fa3;
-  --accent2: #7c5cff;
+  --bg: #2a2d2e;
+  --fg: #f4fafb;
+  --muted: #a8d2de;
+  --accent: #0197a6;
+  --accent2: #43bec6;
+  --deep: #04718e;
+  --light: #a8d2de;
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -39,14 +41,14 @@ html, body {
   padding: 5vh 5vw;
   text-align: center;
   background:
-    radial-gradient(circle at 20% 20%, rgba(124, 92, 255, .35), transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(255, 79, 163, .3), transparent 50%),
+    radial-gradient(circle at 20% 20%, rgba(1, 151, 166, .35), transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(4, 113, 142, .45), transparent 55%),
     var(--bg);
 }
 /* Com foto de fundo enviada na administração: escurece um pouco para o texto aparecer. */
 .has-bg .screen {
   background:
-    linear-gradient(rgba(8, 4, 14, .55), rgba(8, 4, 14, .7)),
+    linear-gradient(rgba(24, 27, 28, .55), rgba(24, 27, 28, .7)),
     var(--bg-image) center / cover no-repeat,
     var(--bg);
 }
@@ -85,7 +87,7 @@ html, body {
   margin: 0;
   font-size: 7vh;
   letter-spacing: -.02em;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  background: linear-gradient(90deg, var(--accent2), var(--light));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -137,7 +139,7 @@ html, body {
 @keyframes pulse { 50% { transform: scale(1.08); } }
 
 .badge {
-  background: rgba(13, 7, 22, .78);
+  background: rgba(34, 37, 38, .78);
   border: .4vh solid var(--accent);
   border-radius: 99px;
   padding: 1vh 2.5vh;
@@ -163,7 +165,7 @@ html, body {
   display: flex;
   align-items: center;
   gap: 1vh;
-  background: rgba(13, 7, 22, .7);
+  background: rgba(34, 37, 38, .7);
   border-radius: 1.5vh;
   padding: 1vh;
   font-size: 1.8vh;
@@ -174,7 +176,7 @@ html, body {
 .hud-qr .qr { width: 13vh; height: 13vh; padding: .6vh; border-radius: 1vh; }
 #hud-next {
   max-width: 32vw;
-  background: rgba(13, 7, 22, .7);
+  background: rgba(34, 37, 38, .7);
   border-radius: 1.5vh;
   padding: 1.2vh 1.6vh;
   font-size: 2.2vh;
@@ -199,7 +201,7 @@ html, body {
   left: 50%;
   bottom: 5vh;
   transform: translate(-50%, 200%);
-  background: #2a1846;
+  background: #3c4345;
   border-left: .6vh solid var(--accent);
   padding: 2vh 3vh;
   border-radius: 1.2vh;

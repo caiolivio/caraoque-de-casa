@@ -1,11 +1,11 @@
 #!/bin/bash
 # Mac: dê dois cliques neste arquivo no Finder. Ele instala o que falta (na primeira vez),
-# liga o Hulioquê e abre a tela da TV no navegador. Feche esta janela para desligar.
+# liga o Huliokê e abre a tela da TV no navegador. Feche esta janela para desligar.
 
 cd "$(dirname "$0")" || exit 1
 clear
 echo ""
-echo "  🎤  Hulioquê · Life is a Huli"
+echo "  🎤  Huliokê · Life is a Huli"
 echo ""
 
 # O Terminal aberto pelo Finder nem sempre conhece o caminho do Node; tenta os lugares comuns.
@@ -47,4 +47,4 @@ URL="http://localhost:$PORT/tv?autostart"
 npm start
 
 echo ""
-read -r -p "  O Hulioquê foi desligado. Aperte Enter para fechar."
+read -r -p "  O Huliokê foi desligado. Aperte Enter para fechar."

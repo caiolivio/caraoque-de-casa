@@ -5,7 +5,7 @@
 .brand-admin { height: 44px; justify-content: flex-start; }
 .back { color: var(--muted); font-size: 14px; }
 
-.card { background: rgba(26, 16, 41, .92); border-radius: 16px; padding: 18px; margin-bottom: 16px; border: 1px solid #2c1e45; }
+.card { background: rgba(51, 56, 58, .92); border-radius: 16px; padding: 18px; margin-bottom: 16px; border: 1px solid #434b4e; }
 .card h2 { margin: 0 0 8px; font-size: 18px; }
 .card h3 { margin: 0; font-size: 16px; }
 
@@ -20,12 +20,12 @@
 code { background: var(--card2); padding: 1px 6px; border-radius: 6px; font-size: 13px; }
 
 #lists { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
-.list-card { background: var(--bg); border: 1px solid #2c1e45; border-radius: 14px; padding: 14px; }
+.list-card { background: var(--bg); border: 1px solid #434b4e; border-radius: 14px; padding: 14px; }
 .list-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 4px; }
 .list-card .list { margin-top: 10px; }
 .list-card .actions { flex-direction: row; }
 .add-form { margin-top: 12px; }
-.results { border-top: 1px dashed #3a2a57; padding-top: 10px; }
+.results { border-top: 1px dashed #4a5356; padding-top: 10px; }
 
 .media-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
 .media { display: flex; flex-direction: column; gap: 8px; }
@@ -41,14 +41,14 @@ code { background: var(--card2); padding: 1px 6px; border-radius: 6px; font-size
   text-align: center;
   padding: 12px;
 }
-.preview-logo { background: repeating-conic-gradient(#1d1330 0 25%, #261a3d 0 50%) 0 0 / 20px 20px; }
+.preview-logo { background: repeating-conic-gradient(#33383a 0 25%, #3c4345 0 50%) 0 0 / 20px 20px; }
 .preview-logo img { max-width: 90%; max-height: 90%; object-fit: contain; }
 label.button {
   display: inline-block;
   cursor: pointer;
   border-radius: 12px;
   padding: 10px 14px;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  background: linear-gradient(135deg, var(--deep), var(--accent));
   color: #fff;
   font-weight: 700;
 }
