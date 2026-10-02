@@ -218,3 +218,16 @@ html, body {
 
 #start { cursor: pointer; z-index: 10; }
 .start-hint { font-size: 4vh; margin: 0; animation: pulse 1.6s ease-in-out infinite; }
+
+.sound-blocked {
+  position: fixed;
+  left: 50%;
+  bottom: 6vh;
+  transform: translateX(-50%);
+  z-index: 30;
+  font-size: 3vh;
+  max-width: 80vw;
+  text-align: center;
+  border-color: var(--accent2);
+  animation: pulse 1.6s ease-in-out infinite;
+}

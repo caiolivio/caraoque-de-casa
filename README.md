@@ -91,6 +91,8 @@ A cota grátis dá cerca de 100 buscas por dia. Buscas repetidas ficam em cache 
 
 ## Dicas de áudio e TV
 
+- Use o **Google Chrome** na TV. Se o navegador bloquear o som, a música continua tocando sem som e aparece um aviso na TV: um clique ou qualquer tecla liga o som de novo. No Safari, libere em Safari › Ajustes › Sites › Reprodução Automática › localhost: **Permitir Toda a Reprodução Automática**.
+
 - Ligue os microfones na placa/mesa e use o **retorno direto** dela. Se a voz passar pelo PC, ela chega atrasada.
 - Ligue a saída de áudio do PC na mesma placa/mesa, assim você controla música e voz separadamente.
 - Coloque a TV em **Modo Jogo** para reduzir o atraso da imagem.

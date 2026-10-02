@@ -6,12 +6,15 @@
   let state = null;
   let player = null;
   let playerReady = false;
-  let started = new URLSearchParams(location.search).has('autostart');
+  const wantsAutostart = new URLSearchParams(location.search).has('autostart');
+  let started = false;
   let loadedItemId = null; // item cujo vídeo está carregado no player
   let cuedItemId = null;
   let countdownTimer = null;
   let introEndsAt = 0;
-  let stallTimer = null;
+  let watchdog = null;
+  let stalledChecks = 0;
+  let mutedBySystem = false; // tocando sem som porque o navegador bloqueou; volta no primeiro clique
 
   socket.on('branding', (info) => window.applyBranding(info));
 
@@ -24,11 +27,41 @@
     socket.emit('tv:ready');
     render();
   }
-  if (started) $('start').hidden = true;
   $('start').addEventListener('click', start);
+
+  // Com ?autostart (atalho que abre o Chrome) só pula o clique inicial se o navegador
+  // realmente permitir tocar com som; senão mostra a tela de início pedindo um clique.
+  if (wantsAutostart) {
+    canPlayWithSound().then((ok) => {
+      if (ok) start();
+      else $('start-hint').textContent = 'Clique ou aperte qualquer tecla para liberar o som';
+    });
+  }
+
+  function canPlayWithSound() {
+    // WAV de 1 ms em silêncio: se o play() for recusado, o navegador está bloqueando som sem clique.
+    const a = new Audio('data:audio/wav;base64,UklGRiwAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQgAAACAgICAgICAgA==');
+    a.volume = 0.01;
+    return a
+      .play()
+      .then(() => (a.pause(), true))
+      .catch((err) => err?.name !== 'NotAllowedError');
+  }
+
+  // Qualquer clique ou tecla devolve o som se o navegador tinha bloqueado.
+  const restoreSound = () => {
+    if (!mutedBySystem || !playerReady) return;
+    mutedBySystem = false;
+    player.unMute();
+    player.setVolume(state?.volume ?? 80);
+    player.playVideo();
+    $('sound-blocked').hidden = true;
+  };
+  document.addEventListener('click', restoreSound);
 
   document.addEventListener('keydown', (e) => {
     if (!started) return start();
+    if (mutedBySystem) return restoreSound();
     if (e.code === 'Space') {
       e.preventDefault();
       socket.emit('host:togglePause');
@@ -81,7 +114,6 @@
           render();
         },
         onStateChange: (e) => {
-          if (e.data === YT.PlayerState.PLAYING) clearTimeout(stallTimer);
           if (e.data === YT.PlayerState.ENDED && loadedItemId) {
             socket.emit('tv:ended', { itemId: loadedItemId });
           }
@@ -146,7 +178,7 @@
           player.setVolume(state.volume);
           loadedItemId = current.id;
           cuedItemId = current.id;
-          watchForStall();
+          startWatchdog();
         } else if (phase === 'playing' && player.getPlayerState() === YT.PlayerState.PAUSED) {
           player.playVideo();
         }
@@ -188,23 +220,44 @@
     if (playerReady && (loadedItemId || cuedItemId)) player.stopVideo();
     loadedItemId = null;
     cuedItemId = null;
-    clearTimeout(stallTimer);
+    stopWatchdog();
   }
 
-  // Se o vídeo não começar (autoplay bloqueado pelo navegador), pede um clique.
-  function watchForStall() {
-    clearTimeout(stallTimer);
-    stallTimer = setTimeout(() => {
-      const s = player.getPlayerState();
-      if (state?.phase === 'playing' && s !== YT.PlayerState.PLAYING && s !== YT.PlayerState.BUFFERING) {
-        showToast('O navegador bloqueou o som. Clique na tela para tocar.');
-        const unlock = () => {
-          player.playVideo();
-          document.removeEventListener('click', unlock);
-        };
-        document.addEventListener('click', unlock);
+  // Vigia se a música realmente está tocando. Se travar (navegador bloqueou o autoplay):
+  // 1) tenta dar play de novo; 2) se continuar travada, toca sem som para a festa não parar
+  //    e mostra um aviso; o primeiro clique ou tecla devolve o som.
+  function startWatchdog() {
+    stopWatchdog();
+    watchdog = setInterval(() => {
+      if (!playerReady || !loadedItemId || state?.phase !== 'playing') {
+        stalledChecks = 0;
+        return;
       }
-    }, 8000);
+      const s = player.getPlayerState();
+      const stuck = s === YT.PlayerState.PAUSED || s === YT.PlayerState.CUED || s === YT.PlayerState.UNSTARTED;
+      if (!stuck) {
+        stalledChecks = 0;
+        return;
+      }
+      stalledChecks++;
+      if (stalledChecks <= 2) {
+        player.playVideo();
+      } else if (!mutedBySystem) {
+        // Mudo o navegador sempre deixa tocar; o som volta no primeiro clique ou tecla.
+        mutedBySystem = true;
+        player.mute();
+        player.playVideo();
+        $('sound-blocked').hidden = false;
+      } else {
+        player.playVideo();
+      }
+    }, 1500);
+  }
+
+  function stopWatchdog() {
+    clearInterval(watchdog);
+    watchdog = null;
+    stalledChecks = 0;
   }
 
   function startCountdown() {
